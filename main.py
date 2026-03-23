@@ -1,5 +1,5 @@
-from flask import Flask, render_template, redirect, abort, request
-from data import db_session
+from flask import Flask, render_template, redirect, abort, request, jsonify, make_response
+from data import db_session, news_api
 from data.news import News
 from data.users import User
 from forms.loginform import LoginForm
@@ -185,11 +185,20 @@ def logout():
     logout_user()
     return redirect("/")
 
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+@app.errorhandler(400)
+def bad_request(_):
+    return make_response(jsonify({'error': 'Bad Request'}), 400)
 
 def main():
     db_session.global_init("db/blogs.db")
     # init_data_users()
     # init_data_news()
+    app.register_blueprint(news_api.blueprint)
     app.run()
 
 
