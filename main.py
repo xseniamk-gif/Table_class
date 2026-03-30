@@ -1,4 +1,7 @@
 from flask import Flask, render_template, redirect, abort, request, jsonify, make_response
+
+
+import news_resources
 from data import db_session, news_api
 from data.news import News
 from data.users import User
@@ -96,7 +99,7 @@ def reqister():
         db_sess.add(user)
         db_sess.commit()
         return redirect('/login')
-    return render_template('register.html', title='Регистрация', form=form)
+    return render_template(' register.html', title='Регистрация', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -198,7 +201,12 @@ def main():
     db_session.global_init("db/blogs.db")
     # init_data_users()
     # init_data_news()
-    app.register_blueprint(news_api.blueprint)
+
+    # для списка объектов
+    news_resources.api.add_resource(news_resources.NewsListResource, '/api/v2/news')
+
+    # для одного объекта
+    news_resources.api.add_resource(news_resources.NewsResource, '/api/v2/news/<int:news_id>')
     app.run()
 
 
