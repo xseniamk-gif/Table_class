@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template, redirect, abort, request, jsonify, make_response
 
 
@@ -207,7 +209,8 @@ def main():
 
     # для одного объекта
     news_resources.api.add_resource(news_resources.NewsResource, '/api/v2/news/<int:news_id>')
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
 
 
 if __name__ == '__main__':
