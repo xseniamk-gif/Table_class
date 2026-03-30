@@ -1,7 +1,11 @@
-flask
-flask-wtf
+Flask
+Werkzeug
 sqlalchemy
-flask-login
 SQLAlchemy-serializer
-flask-restful
 requests
+flask-wtf
+flask-login
+flask-restful
+waitress
+markupsafe
+WTForms
