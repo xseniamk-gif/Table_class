@@ -1,11 +1,8 @@
-Flask
-Werkzeug
-sqlalchemy
-SQLAlchemy-serializer
-requests
+flask
 flask-wtf
+sqlalchemy
 flask-login
+SQLAlchemy-serializer
 flask-restful
-waitress
-markupsafe
-WTForms
+requests
+setuptools
